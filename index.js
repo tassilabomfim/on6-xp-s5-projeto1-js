@@ -7,23 +7,31 @@ console.log('Funções')
 
 // FUNÇÕES
 // Possuímos as funções: falar, dobro, calcularMedia
-function falar() {
-  return 'Pipipi popopo'
-}
+// function falar() {
+//   return 'Pipipi popopo'
+// }
 
-function dobro(num) {
-  return num * 2
-}
+// function dobro(num) {
+//   return num * 2
+// }
 
-function calcularMedia(nota1, nota2, nota3) {
+// function calcularMedia(nota1, nota2, nota3) {
+//   const soma = (nota1 + nota2 + nota3)
+//   const media = soma / 3
+//   return media
+// }
+
+// Vamos refatorar essas funções para a sintaxe de Arrow function
+
+const falar = () => 'Pipipi popopo'
+
+const dobro = num => num * 2
+
+const calcularMedia = (nota1, nota2, nota3) =>  { 
   const soma = (nota1 + nota2 + nota3)
   const media = soma / 3
   return media
 }
-
-// Vamos refatorar essas funções para a sintaxe de Arrow function
-
-
 
 
 
@@ -33,73 +41,78 @@ console.log('Callback')
 
 // CALLBACK
 // Possuímos as funções: somar, subtrair, multiplicar e dividir.
-function somar(a, b) {
-  return a + b
-}
+// function somar(a, b) {
+//   return a + b
+// }
 
-function subtrair(a, b) {
-  return a - b
-}
+// function subtrair(a, b) {
+//   return a - b
+// }
 
-function multiplicar(a, b) {
-  return a * b
-}
+// function multiplicar(a, b) {
+//   return a * b
+// }
 
-function dividir(a, b) {
-  return a / b
-}
+// function dividir(a, b) {
+//   return a / b
+// }
 
-function ordenar(a, b) {
-  if (a <= b) {
-    return [a, b]
-  } else {
-    return [b, a]
-  }
-}
+// function ordenar(a, b) {
+//   if (a <= b) {
+//     return [a, b]
+//   } else {
+//     return [b, a]
+//   }
+// }
 
+const somar = (a, b) => a + b
+
+const subtrair = (a, b) => a - b
+
+const multiplicar = (a, b) => a * b
+
+const dividir = (a, b) => a / b
+
+const ordenar = (a, b) =>  (a <= b) ? [a, b] : [b, a]
 
 // Crie uma função chamada calcular que receberá como parâmetro: dois números e uma função de callback
-
-
-
-
-
+const calcular = (n1, n2, callback) => callback(n1, n2)
 
 
 // Faça a soma de dois números usando a função calcular
 
+const resultadoSoma = calcular(3, 5, somar)
 
-
-
+console.log(`A soma de 3 com 5 é ${resultadoSoma}`)
 
 
 
 // Faça a subtração de dois números usando a função calcular
 
 
+const resultadoSubtrair = calcular(10, 5, subtrair)
 
+console.log(`A subtração de 10 e 5 é ${resultadoSubtrair}`)
 
 
 
 
 // Faça a multiplicação de dois números usando a função calcular
 
+const resultadoMultiplicar = calcular(2, 6, multiplicar)
 
-
-
-
-
+console.log(`A multiplicação de 2 e 6 é ${resultadoMultiplicar}`);
 
 // Faça a divisão de dois números usando a função calcular
 
+const resultadoDivisao =  calcular(100, 5, dividir)
 
-
-
-
+console.log (`O resultado da divisão entre 100 e 5 é ${resultadoDivisao}`)
 
 // Faça a ordenação crescente de dois números usando a função calcular
 
-
+const falei = falar()
+console.log(falei)
 
 
 
@@ -119,11 +132,13 @@ const n3 = 1
 
 // Verifique se a estudante foi aprovada. Se a média das notas for maior ou igual a 7, a estudante passou!
 
+const media = calcularMedia(n1, n2, n3)
 
+const resultado = (media >= 7) ? 'aprovado' : 'reprovado'
 
+//codição ? true : false
 
-
-
+console.log(`A estudante foi ${resultado} !`)
 
 console.log('-----------------------------------------------------')
 // ----------------------------------------------
@@ -144,11 +159,12 @@ const pokemon = {
 
 // Fazer destructuring e acessar os valores de objeto e pokemon
 
+const { nome, tipo, peso } = objeto
+console.log(`O objeto ${nome} é feito de ${tipo} e pesa ${peso} kg.`)
 
 
-
-
-
+const { name, type, height } = pokemon
+console.log(`Capturei o pokemon ${name} que tem tipo ${type} tem altura de ${height} cm.`);
 
 console.log('-----------------------------------------------------')
 // ----------------------------------------------
