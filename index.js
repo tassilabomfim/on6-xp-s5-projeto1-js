@@ -249,7 +249,7 @@ console.log(pessoa.apresentacao())
 
 // Quero criar as variáveis pessoa2 e pessoa3 com as mesmas propriedades, mas alterando os valores de nome, sobrenome, altura e peso
 
-
+//em pessoa2 utilizamos o metodo this para  com function para clases, pois temos um 'esqueleto'.
 const pessoa2 = {
   nome: 'Tassila',
   sobrenome: 'Bomfim',
@@ -258,18 +258,18 @@ const pessoa2 = {
   peso: 80,
   andando: false,
   caminhouQuantosMetros: 0,
-  fazerAniversario: () => pessoa2.idade++,
-  andar: (metrosCaminhados) => {
-    pessoa2.andando = true
-    pessoa2.caminhouQuantosMetros += metrosCaminhados
+  fazerAniversario: function() { this.idade++ },
+  andar: function(metrosCaminhados) {
+    this.andando = true
+    this.caminhouQuantosMetros += metrosCaminhados
   },
-  parar: () => pessoa2.andando = false,
-  apresentacao: () => {
-    const anos = (pessoa2.idade === 1) ? 'ano' : 'anos'
+  parar: function() { this.andando = false },
+  apresentacao: function()  {
+    const anos = (this.idade === 1) ? 'ano' : 'anos'
   
-    const metros = (pessoa2.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
+    const metros = (this.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
   
-    return `Olá, eu sou ${pessoa2.nome} ${pessoa2.sobrenome}, tenho ${pessoa2.idade} ${anos}, ${pessoa2.altura}, meu peso é ${pessoa2.peso} e, só hoje, eu já caminhei ${pessoa2.caminhouQuantosMetros} ${metros}!`
+    return `Olá, eu sou ${this.nome} ${this.sobrenome}, tenho ${this.idade} ${anos}, ${this.altura}, meu peso é ${this.peso} e, só hoje, eu já caminhei ${this.caminhouQuantosMetros} ${metros}!`
   }
 }
 
@@ -278,6 +278,34 @@ pessoa2.andar(200)
 console.log(pessoa2.apresentacao())
 
 
+//em pessoa3 dentro do objetito utilizando this você pode chamar a funcao direto sem colocar o funtion
+const pessoa3 = {
+  nome: 'Marta',
+  sobrenome: 'Costa',
+  idade: 35,
+  altura: 1.78,
+  peso: 77,
+  andando: false,
+  caminhouQuantosMetros: 0,
+  fazerAniversario() { this.idade++ },
+  andar(metrosCaminhados) {
+    this.andando = true
+    this.caminhouQuantosMetros += metrosCaminhados
+  },
+  parar() { this.andando = false },
+  apresentacao()  {
+    const anos = (this.idade === 1) ? 'ano' : 'anos'
+  
+    const metros = (this.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
+  
+    return `Olá, eu sou ${this.nome} ${this.sobrenome}, tenho ${this.idade} ${anos}, ${this.altura}, meu peso é ${this.peso} e, só hoje, eu já caminhei ${this.caminhouQuantosMetros} ${metros}!`
+  }
+}
+
+pessoa3.andar(1)
+
+console.log(pessoa3.apresentacao())
+
 
 
 console.log('-----------------------------------------------------')
@@ -285,16 +313,49 @@ console.log('-----------------------------------------------------')
 // CLASSES
 console.log('Classes 🆕')
 
-// Vamos criar a classe Pessoa
+// Vamos criar a classe Pessoa //no objeto precisa da virgula para separar, na classe não!!
 
 class Pessoa {
-  constructor(){
-    this
+  constructor(name, surname, age, walking = false, distance = 0) {
+    this.nome = name
+    this.sobrenome = surname
+    this.idade = age
+    this.andando = walking 
+    this.caminhouQuantosMetros = distance
+  }
+  fazerAniversario(){
+    this.idade++
+  }
+  andar(metrosCaminhados) {
+    this.andando = true
+    this.caminhouQuantosMetros += metrosCaminhados
+  }
+  parar() { 
+    this.andando = false 
+  }
+  apresentacao()  {
+    const anos = (this.idade === 1) ? 'ano' : 'anos'
+  
+    const metros = (this.caminhouQuantosMetros <= 1) ? 'metro' : 'metros'
+  
+    return `Olá, eu sou ${this.nome} ${this.sobrenome}, tenho ${this.idade} ${anos}, ${this.altura}, meu peso é ${this.peso} e, só hoje, eu já caminhei ${this.caminhouQuantosMetros} ${metros}!`
   }
 }
 
+const pessoa4 = new Pessoa('Camila', 'Marques', 24 );
+console.log(pessoa4.nome);
+
+const { sobrenome } = pessoa4
+console.log(sobrenome)
+
+pessoa4.fazerAniversario()
+console.log(pessoa4)
 
 
+//chamando pessoa 5 com o metodo classe
+
+const pessoa5 = new Pessoa('Vanessa', 'Pontes', 28, true, 300)
+console.log(pessoa5);
 
 
 console.log('-----------------------------------------------------')
@@ -309,34 +370,33 @@ const numbers = [9, 2, 5]
 
 // Acessando elementos pela posição do array
 
-
-
-
-
+console.log(lista[2]);
 
 
 // Informe o tamanho de cada array
 
-
-
-
-
+console.log(numbers.length);
 
 
 // Faça a desestruturação do array
 
 
+const [primeiro, segundo, terceiro] = lista
 
-
-
+console.log(primeiro);
+console.log(segundo);
+console.log(terceiro);
 
 
 // Possuo 4 tias. Os dados delas estão armazenados no array de objetos dentro do arquivo db.js
 // Vamos importar esses dados para podermos usá-los durante nosso exercício de revisão.
 const db = require('./db')
 
+console.log(db);
 
+const { tias }= db
 
+console.log(tias);
 
 
 
@@ -347,11 +407,9 @@ console.log('Métodos iteração ')
 
 // Mostre a tabela das tias pelo console.table()
 
+console.table(tias)
 
-
-
-
-
+console.table(lista)
 
 console.log('-----------------------------------------------------')
 console.log('filter()')
