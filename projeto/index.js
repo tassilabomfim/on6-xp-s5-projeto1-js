@@ -4,10 +4,12 @@ console.log('--------------------------------------')
 
 const db = require('./database')
 
+// Listar no console uma tabela contendo os produtos em ordem crescente de preço (do menor ao maior). Utilize a lista contida no arquivo database.js
+
 const { produtos } = db
-console.table(produtos)
 
 produtos.sort((a, b) => a.preco - b.preco)
-
 console.table(produtos)
+
+
 
