@@ -7,6 +7,7 @@ const db = require('./database')
 const { produtos } = db
 console.table(produtos)
 
-produtos.sort((a, b) => b.preco + a.preco)
+produtos.sort((a, b) => a.preco - b.preco)
 
 console.table(produtos)
+

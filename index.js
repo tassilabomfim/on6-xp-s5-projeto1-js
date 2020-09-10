@@ -203,14 +203,14 @@ console.log(`nasci em ${nascimento}`)
 
 // Podemos usar o método toLocaleString para formatar a data
 
-const dataFormatada = hoje.toLocaleDateString('pt-BR') //teria que passar 03/09/2020
+const dataFormatada = hoje.toLocaleDateString('pt-br') //teria que passar 03/09/2020
 console.log(dataFormatada) 
 
 
 // Temos mais opções para formatar a data
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
-const dataLonga = hoje.toLocaleDateString('pt-BR', options)
+const dataLonga = hoje.toLocaleDateString('pt-br', options)
 console.log(dataLonga) //era pra retornar Segunda, 3 de setembro de 1990
 
 console.log('-----------------------------------------------------')
@@ -416,10 +416,18 @@ console.log('filter()')
 // filter
 // Filtre as tias que moram em SP e mostre no console.
 
+// function filtrarTias (item) {
+//   return item.local === 'SP'
+// }
+
+// const tiasSP = tias.filter(filtrarTias)
+// console.table(tiasSP)
+
+//o mesmo acontece desta forma
 
 
-
-
+const tiasSP = tias.filter((item) => item.local === 'SP')
+console.table(tiasSP)
 
 
 console.log('-----------------------------------------------------')
@@ -427,8 +435,30 @@ console.log('map()')
 // map
 // Crie um novo array chamado tiasMaisChegadas e adicione uma propriedade chamada cuidouDeMim que recebe um valor booleano. Caso a tia teve até 2 filhos, isso significa que ela cuidou de mim e seu valor é true. Caso ela teve mais que 2 filhos, o valor da propriedade cuidouDeMim é false.
 
+function cuidar(tia) {
+  const { nome, idade, filhos, local } = tia
+  
+  if (tia.filhos <=2) {
+    const tiaNova = {
+      nome, 
+      idade,
+      filhos,
+      local,
+      cuidouDeMim: true
+    }
+    return tiaNova
+    
+  } else{
+    const tiaNaoChegada = {
+      ...tia,  //(...) é spread syntax, signfica um clone do obj
+      cuidouDeMim: false
+    }
+    return tiaNaoChegada
+  }
+}
 
-
+const tiasMaisChegadas = tias.map(cuidar)
+console.log(tiasMaisChegadas);
 
 
 
@@ -440,31 +470,48 @@ console.log('sort()')
 // Vamos praticar o método sort() com o array numbers
 // const numbers = [9, 2, 5]
 
-const comparar = (a, b) => {
-  if (a < b) { // primeiro vem b e depois vem a
-    return -1
-  } else if (a > b) { // mantenho a como primeiro e b vem depois
-    return 1
-  } else { // se a e b forem iguais, mantém a mesma ordem
-    return 0
-  }
-}
+
+// era assim:
+// const comparar = (a, b) => {
+//   if (a < b) { // mantenho a como primeiro e b vem depois
+//     return -1
+//   } else if (a > b) { // primeiro vem b e depois vem a
+//     return 1
+//   } else { // se a e b forem iguais, mantém a mesma ordem
+//     return 0
+//   }
+// }
+
+// numbers.sort(comparar)
+// console.log(numbers);
+
+// 9 e 2 -> retornar valor positivo -> 9 - 2 = 7 positivo
+// 2 e 5 -> retornar valor negativo -> 2 - 5 = -3 negativo
+// 2 e 2 -> retornar valor zero -> 2 - 2 = 0
+
+//ficou assim:
 
 // Refatore a função comparar e ordene numbers em ordem crescente
 
 
-
-
-
+numbers.sort((a, b) => a - b)
+console.log(numbers);
 
 
 // Ordene as tias por ordem decrescente de idade (a mais velha primeiro)
 
+// //era assim:
+// function ordenarTias(a, b) {
+//   return b.idade - a.idade
+// }
+
+// tias.sort(ordenarTias)
 
 
+//fica assim 
 
-
-
+tias.sort((a, b) => b.idade - a.idade)
+console.table(tias);
 
 
 console.log('-----------------------------------------------------')
@@ -472,19 +519,36 @@ console.log('reduce()')
 // reduce
 
 // Faça a soma do array numbers
+//pode ser utilizado para somar o frete
+
+//era assim
+// function somarTodos(acumulador, item) {
+//   return acumulador + item
+// }
+// const arrayReduzido = numbers.reduce(somarTodos, 10)
 
 
+//ficou assim
 
+const arrayReduzido = numbers.reduce((acumulador, item) => acumulador + item, 10)
+
+console.log(arrayReduzido);
 
 
 
 
 // Some a quantidade de netos que vovó possui.
+//uma fora de somar total, subtotal para pedido
+//era assim:
+// function somarNetos(acumulador, tia) {
+//   return acumulador + tia.filhos
+// }
+
+// const netos = tias.reduce(somarNetos, 0)
 
 
-
-
-
+const netos = tias.reduce((acumulador, tia) => acumulador + tia.filhos, 0)
+console.log(netos);
 
 
 // ----------------------------------------------
