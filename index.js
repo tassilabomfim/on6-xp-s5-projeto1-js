@@ -355,7 +355,7 @@ console.log(pessoa4)
 //chamando pessoa 5 com o metodo classe
 
 const pessoa5 = new Pessoa('Vanessa', 'Pontes', 28, true, 300)
-console.log(pessoa5);
+console.table(pessoa5);
 
 
 console.log('-----------------------------------------------------')
